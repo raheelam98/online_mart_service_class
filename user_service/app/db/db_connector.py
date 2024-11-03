@@ -1,4 +1,4 @@
-# user_service - db_connector.py
+# user_service -  user_service/app/db_connector.py
 
 from app.settings import DB_URL
 from sqlmodel import create_engine, SQLModel, Session
@@ -34,5 +34,5 @@ async def create_db_and_tables(app: FastAPI):
     # Create all tables based on the defined SQLModel metadata 
     SQLModel.metadata.create_all(engine) 
     # Yield control back to the caller (generator function) 
-    yield  
+    yield    
 

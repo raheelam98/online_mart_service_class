@@ -1,4 +1,4 @@
-# user_service_auth -  user_service_auth/app/Dockerfile
+# product_service -  product_service/app/Dockerfile
 
 # Use an official Python runtime as a parent image
 FROM python:3.12

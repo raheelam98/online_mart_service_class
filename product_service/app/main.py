@@ -1,3 +1,5 @@
+# product_service -  product_service/app/main.py
+
 from fastapi import FastAPI, Depends, HTTPException
 from sqlmodel import SQLModel, Field, create_engine, Session, select
 from typing import Optional, Annotated, List

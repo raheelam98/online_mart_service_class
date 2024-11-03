@@ -1,4 +1,4 @@
-# user_service_auth - app/settings.py
+# user_service - app/settings.py
 
 from starlette.config import Config
 from starlette.datastructures import Secret
