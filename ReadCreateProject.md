@@ -162,9 +162,13 @@ The code in the function before yield will be executed each time the generator i
 
 ## Function to create the database and tables
 ```bash
+# Function to create the database and tables
 async def create_db_and_tables(app: FastAPI):
-    print(f'Create Tables ...  {app} ')
-    SQLModel.metadata.create_all(engine)
-    yield
+    # Print a message indicating the start of table creation
+    print(f'Create Tables ...  {app} ') 
+    # Create all tables based on the defined SQLModel metadata 
+    SQLModel.metadata.create_all(engine) 
+    # Yield control back to the caller (generator function) 
+    yield  
 ```
 
