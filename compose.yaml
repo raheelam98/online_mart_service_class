@@ -1,0 +1,89 @@
+# compose.yaml - 
+version: "3.9"
+
+name: online_mart
+
+### ========================= *****  ========================= ###
+
+services:
+
+  users:
+    build:
+      context: ./user_service
+      dockerfile: Dockerfile
+    container_name: user_container
+    ports:
+      - "8081:8000"  # Expose host port 8081 to container port 8000 
+    depends_on:
+        - postgres_db 
+        - kafka  
+    volumes:
+      - ./user_service:/code   
+
+  ### ========================= *****  ========================= ###
+
+  product:
+    build:
+      context: ./product_service
+      dockerfile: Dockerfile
+    container_name: product_container
+    ports:
+      - "8082:8000"  # Expose host port 8008 to container port 8000 
+    depends_on:
+        - postgres_db   
+    volumes:
+      - ./product_service:/code 
+
+  ### ========================= *****  ========================= ###
+
+  # ## pg Admin
+
+  # postgres_db:
+  #   image: postgres:latest  # Use the official PostgreSQL image
+  #   restart: always
+  #   container_name: PostgresCont
+  #   environment:
+  #       - POSTGRES_USER=ziakhan
+  #       - POSTGRES_PASSWORD=my_password
+  #       - POSTGRES_DB=mydatabase
+  #   ports:
+  #       - '5432:5432'
+  #   volumes:
+  #       - postgres_db:/var/lib/postgresql/data
+ 
+### ========================= *****  ========================= ###
+
+  ## neon
+  ## DATABASE_URL=postgresql://database_owner_name:password@hostname:port/database_name?sslmode=require
+
+
+  postgres_db:
+    image: postgres:latest  # Use the official PostgreSQL image
+    restart: always
+    container_name: PostgresCont
+    environment:
+        - POSTGRES_USER=database_owner_name
+        - POSTGRES_PASSWORD=password
+        - POSTGRES_DB=database_name
+    ports:
+        - '5432:5432'
+    volumes:
+        - postgres_db:/var/lib/postgresql/data
+
+
+### ========================= *****  ========================= ###
+
+volumes:
+  postgres_db:
+    driver: local
+
+### ========================= *****  ========================= ###
+
+networks:
+  default:
+    driver: bridge
+
+### ========================= *****  ========================= ###
+
+
+
