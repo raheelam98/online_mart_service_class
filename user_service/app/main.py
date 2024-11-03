@@ -16,7 +16,7 @@ app = FastAPI(lifespan= create_db_and_tables)
 
 @app.get('/')
 def root_route_user():
-    return "User Service"
+    return "User Service"   
 
 ### ========================= *****  ========================= ###
 

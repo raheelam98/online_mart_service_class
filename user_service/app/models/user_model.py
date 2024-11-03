@@ -1,4 +1,4 @@
-# user_service -  user_service/app/user_model.py
+# user_service -  user_service/app/user_model.py   
 
 from sqlmodel import SQLModel, Field
 from typing import Optional

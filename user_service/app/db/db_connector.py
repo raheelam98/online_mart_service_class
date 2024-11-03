@@ -1,4 +1,4 @@
-# user_service -  user_service/app/db_connector.py
+# user_service -  user_service/app/db_connector.py   
 
 from app.settings import DB_URL
 from sqlmodel import create_engine, SQLModel, Session

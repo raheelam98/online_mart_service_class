@@ -5,7 +5,7 @@ from starlette.datastructures import Secret
 from datetime import timedelta
 
 try:
-    config = Config(".env")
+    config = Config(".env")  
 except FileNotFoundError:
     config = Config()  
 

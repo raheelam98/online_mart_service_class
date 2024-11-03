@@ -1,6 +1,6 @@
 # user_service -  user_service/app/Dockerfile
 
-# Use an official Python runtime as a parent image
+# Use an official Python runtime as a parent image  
 FROM python:3.12
 
 LABEL maintainer="raheela"

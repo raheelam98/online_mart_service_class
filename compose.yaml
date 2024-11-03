@@ -60,7 +60,7 @@ services:
   postgres_db:
     image: postgres:latest  # Use the official PostgreSQL image
     restart: always
-    container_name: PostgresCont
+    container_name: PostgresCont    
     environment:
         - POSTGRES_USER=database_owner_name
         - POSTGRES_PASSWORD=password
