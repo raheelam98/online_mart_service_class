@@ -135,6 +135,61 @@ def verifyPassword(plainText: str, hashedPassword: str) -> bool:
 
 **Verification: `pwd_context.verify()`** checks if a provided password matches the stored hash, returning True if it matches and False otherwise.
 
+#### Register User / Singin
+```bash
+from fastapi import FastAPI, HTTPException, status
+from sqlmodel import select
+from passlib.context import CryptContext
+
+from app.db.db_connector import create_db_and_tables, DB_SESSION
+from app.models.user_model import User, UserModel
+
+app = FastAPI(lifespan= create_db_and_tables)
+
+# CryptContext is used to handle password hashing and verification using bcrypt
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
+# Function to hash a password using bcrypt
+def hash_password(password: str) -> str:
+    return pwd_context.hash(password)  # Hash the password using the bcrypt hashing algorithm
+
+# Function to verify a plain text password against a hashed password
+def verify_password(plainText: str, hashedPassword: str) -> bool:
+    return pwd_context.verify(plainText, hashedPassword)  # Verify if the plain text password matches the hashed password
+
+# Route to register user
+@app.post("/register_user", response_model=User)
+async def register_user(new_user: UserModel, session: DB_SESSION):
+
+    # Check if user already exists in the database by email
+    db_user = session.exec(select(User).where(User.user_email == new_user.user_email)).first()
+    
+    # If the user already exists, raise an HTTP 409 Conflict exception with a detailed message
+    if db_user:
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail="A user with this email already exists. Please try registering with a different email address."
+        )
+    
+    # Create a new user object with the provided data and hashed password
+    user = User(
+        user_name=new_user.user_name,
+        user_email=new_user.user_email,
+        user_password=hash_password(new_user.user_password),
+        user_address=new_user.user_address,
+        user_country=new_user.user_country,
+        phone_number=new_user.phone_number
+    )
+
+    # Add the new user to the session
+    session.add(user)
+    session.commit()  # Commit to save the new user to the database
+    session.refresh(user)  # Refresh the user instance to get the latest data from the database
+    
+    # Return the created user object as the response
+    return user
+```
+
 #### Login for access toke
 ```bash
 from fastapi import Depends, HTTPException, status
