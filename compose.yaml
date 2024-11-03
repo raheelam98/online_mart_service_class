@@ -57,18 +57,31 @@ services:
   ## DATABASE_URL=postgresql://database_owner_name:password@hostname:port/database_name?sslmode=require
 
 
+  # postgres_db:
+  #   image: postgres:latest  # Use the official PostgreSQL image
+  #   restart: always
+  #   container_name: PostgresCont
+  #   environment:
+  #       - POSTGRES_USER=database_owner_name
+  #       - POSTGRES_PASSWORD=password
+  #       - POSTGRES_DB=database_name
+  #   ports:
+  #       - '5432:5432'
+  #   volumes:
+  #       - postgres_db:/var/lib/postgresql/data
+
   postgres_db:
     image: postgres:latest  # Use the official PostgreSQL image
     restart: always
     container_name: PostgresCont
     environment:
-        - POSTGRES_USER=database_owner_name
-        - POSTGRES_PASSWORD=password
-        - POSTGRES_DB=database_name
+        - POSTGRES_USER=neondb_owner
+        - POSTGRES_PASSWORD=WC94rhZSjwUe
+        - POSTGRES_DB=online_mart_class_db
     ports:
         - '5432:5432'
     volumes:
-        - postgres_db:/var/lib/postgresql/data
+        - postgres_db:/var/lib/postgresql/data  
 
 
 ### ========================= *****  ========================= ###
