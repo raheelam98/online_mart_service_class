@@ -135,7 +135,7 @@ def verifyPassword(plainText: str, hashedPassword: str) -> bool:
 
 **Verification: `pwd_context.verify()`** checks if a provided password matches the stored hash, returning True if it matches and False otherwise.
 
-#### Register User / Singin
+### Register User / Singin
 ```bash
 from fastapi import FastAPI, HTTPException, status
 from sqlmodel import select
@@ -190,7 +190,7 @@ async def register_user(new_user: UserModel, session: DB_SESSION):
     return user
 ```
 
-#### Login for access toke
+### Login for access toke
 ```bash
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
