@@ -102,6 +102,31 @@ print(list(a))
 -yield statements are executed when the function resumes its execution.
 **Note:** The generator is NOT a normal function. It remembers the previous state like local variables (stack).
 
+
+## Git commands
+
+#### Check if the branch exists locally:
+```bash
+git branch
+```
+
+#### If the branch doesn’t exist, create it and switch to it:
+```bash
+git checkout -b user_service
+```
+
+#### Add and commit your changes:
+```bash
+git add .
+git commit -m "Your commit message"
+```
+
+#### Push the main/branch to the remote repository by force:
+```bash
+git push origin main/branch-name --force
+```
+
+
 ## Tutorials
 
 
